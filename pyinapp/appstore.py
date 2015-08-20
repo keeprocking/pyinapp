@@ -3,17 +3,16 @@ from pyinapp.errors import InAppValidationError
 from requests.exceptions import RequestException
 import requests
 
-
 api_result_ok = 0
 api_result_errors = {
-    21000: InAppValidationError('AppStore API error: bad json'),
-    21002: InAppValidationError('AppStore API error: bad data'),
-    21003: InAppValidationError('AppStore API error: receipt authentication'),
-    21004: InAppValidationError('AppStore API error: shared secret mismatch'),
-    21005: InAppValidationError('AppStore API error: server is unavailable'),
-    21006: InAppValidationError('AppStore API error: subscription has expired'),
-    21007: InAppValidationError('AppStore API error: sandbox receipt was sent to the production env'),
-    21008: InAppValidationError('AppStore API error: production receipt was sent to the sandbox env'),
+    21000: InAppValidationError('bad json'),
+    21002: InAppValidationError('bad data'),
+    21003: InAppValidationError('receipt authentication'),
+    21004: InAppValidationError('shared secret mismatch'),
+    21005: InAppValidationError('server is unavailable'),
+    21006: InAppValidationError('subscription has expired'),
+    21007: InAppValidationError('sandbox receipt was sent to the production env'),
+    21008: InAppValidationError('production receipt was sent to the sandbox env'),
 }
 
 
@@ -37,7 +36,7 @@ class AppStoreValidator(object):
 
         status = api_response['status']
         if status != api_result_ok:
-            error = api_result_errors.get(status, InAppValidationError('Unknown AppStore API status'))
+            error = api_result_errors.get(status, InAppValidationError('Unknown API status'))
             raise error
 
         receipt = api_response['receipt']
