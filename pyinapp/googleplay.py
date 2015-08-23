@@ -30,13 +30,7 @@ class GooglePlayValidator(object):
             if receipt_json['purchaseState'] != purchase_state_ok:
                 raise InAppValidationError('Item is not purchased')
 
-            purchase = {
-                'transaction_id': receipt_json['orderId'],
-                'product_id': receipt_json['productId'],
-                'quantity': 1,
-                'purchased_at': receipt_json['purchaseTime']
-            }
-            return Purchase(**purchase)
+            return self._extract_purchase(receipt_json)
         except (KeyError, ValueError):
             raise InAppValidationError('Bad receipt')
 
@@ -49,3 +43,12 @@ class GooglePlayValidator(object):
             return verifier.verify(sha, signature)
         except (TypeError, ValueError):
             return False
+
+    def _extract_purchase(self, node):
+        purchase = {
+            'transaction_id': node['orderId'],
+            'product_id': node['productId'],
+            'quantity': 1,
+            'purchased_at': node['purchaseTime']
+        }
+        return Purchase(**purchase)
