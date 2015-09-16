@@ -48,4 +48,3 @@ class GooglePlayValidator(object):
             return rsa.verify(receipt.encode(), sig, self.public_key)
         except (rsa.VerificationError, TypeError):
             return False
-
