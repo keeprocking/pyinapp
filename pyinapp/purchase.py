@@ -8,7 +8,7 @@ class Purchase(object):
         self.purchased_at = purchased_at
 
     @classmethod
-    def from_appstore_receipt(cls, receipt):
+    def from_app_store_receipt(cls, receipt):
         purchase = {
             'transaction_id': receipt['transaction_id'],
             'product_id': receipt['product_id'],
