@@ -1,5 +1,5 @@
-Get pyinapp
-===========
+Installation
+============
 ::
 
     pip install pyinapp
