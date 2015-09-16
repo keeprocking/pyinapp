@@ -6,14 +6,14 @@ import requests
 
 api_result_ok = 0
 api_result_errors = {
-    21000: InAppValidationError('bad json'),
-    21002: InAppValidationError('bad data'),
-    21003: InAppValidationError('receipt authentication'),
-    21004: InAppValidationError('shared secret mismatch'),
-    21005: InAppValidationError('server is unavailable'),
-    21006: InAppValidationError('subscription has expired'),
-    21007: InAppValidationError('sandbox receipt was sent to the production env'),
-    21008: InAppValidationError('production receipt was sent to the sandbox env'),
+    21000: InAppValidationError('Bad json'),
+    21002: InAppValidationError('Bad data'),
+    21003: InAppValidationError('Receipt authentication'),
+    21004: InAppValidationError('Shared secret mismatch'),
+    21005: InAppValidationError('Server is unavailable'),
+    21006: InAppValidationError('Subscription has expired'),
+    21007: InAppValidationError('Sandbox receipt was sent to the production env'),
+    21008: InAppValidationError('Production receipt was sent to the sandbox env'),
 }
 
 
