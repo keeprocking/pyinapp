@@ -3,6 +3,7 @@ from pyinapp.errors import InAppValidationError
 from requests.exceptions import RequestException
 import requests
 
+
 api_result_ok = 0
 api_result_errors = {
     21000: InAppValidationError('bad json'),
@@ -51,18 +52,9 @@ class AppStoreValidator(object):
     def _parse_ios6_receipt(self, receipt):
         if self.bundle_id != receipt['bid']:
             raise InAppValidationError('Bundle id mismatch')
-        return self._extract_purchase(receipt)
+        return Purchase.from_appstore_receipt(receipt)
 
     def _parse_ios7_receipt(self, receipt):
         if self.bundle_id != receipt['bundle_id']:
             raise InAppValidationError('Bundle id mismatch')
-        return [self._extract_purchase(p) for p in receipt['in_app']]
-
-    def _extract_purchase(self, node):
-        purchase = {
-            'transaction_id': node['transaction_id'],
-            'product_id': node['product_id'],
-            'quantity': node['quantity'],
-            'purchased_at': node['purchase_date']
-        }
-        return Purchase(**purchase)
+        return [Purchase.from_appstore_receipt(r) for r in receipt['in_app']]
