@@ -47,8 +47,7 @@ Note that since iOS 7 Apple provides a new kind of receipt called Grand Unified 
 ::
 
     def process_purchase(purchase):
-        p = purchase if isinstance(purchase, list) else [purchase]
-        process(*p)
+        process(*purchase) if isinstance(purchase, list) else process(purchase)
 
 
     def process(*purchases):
