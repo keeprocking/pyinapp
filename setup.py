@@ -5,7 +5,7 @@ setup(
     name='pyinapp',
     version='0.1.0',
     packages=['pyinapp'],
-    install_requires=['rsa'],
+    install_requires=['rsa', 'requests'],
     description="InApp purchase validation API wrappers",
     keywords='inapp store purchase googleplay appstore market',
     author='Ivan Mukhin',
