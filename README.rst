@@ -52,7 +52,18 @@ Note that since iOS 7 Apple provides a new kind of receipt called Grand Unified 
 
     def process(*purchases):
         for p in purchases:
+            print(p.transaction_id, p.product_id, p.quantity, p.purchased_at)
             """ for instance, save p to db and add a player some coins for it """
 
 
 This approach allows to process both Google Play and App Store purchases the same way.
+
+Purchase
+========
+
+Purchase is a universal wrapper for Google Play and App Store receipts. It contains the following fields:
+
+- **transaction_id**: id of the purchase (**transaction_id** for App Store and **orderId** for Google Play)
+- **product_id**: what product has been purchased (**product_id** for App Store and **productId** for Google Play);
+- **quantity**: how many products have been purchased (**quantity** for App Store and always **1** for Google Play - there's no such field in Google Play receipt);
+- **purchased_at**: when the product has been purchased, UNIX timestamp (**purchase_date** for App Store and **purchase_time** for Google Play).
