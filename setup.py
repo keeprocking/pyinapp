@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='pyinapp',
-    version='0.1.0',
+    version='0.1.1',
     packages=['pyinapp'],
     install_requires=['rsa', 'requests'],
     description="InApp purchase validation API wrappers",
