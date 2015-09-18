@@ -24,7 +24,7 @@ Google Play:
         purchase = validator.validate('receipt', 'signature')
         process_purchase(purchase)
     except InAppValidationError:
-        """ process validation error """
+        """ handle validation error """
 
 App Store:
 ----------
@@ -40,9 +40,10 @@ App Store:
         purchase = validator.validate('receipt')
         process_purchase(purchase)
     except InAppValidationError:
-        """ process validation error """
+        """ handle validation error """
 
-Note that since iOS 7 Apple provides a new kind of receipt called Grand Unified Receipt which contains multiple receipts in itself. In this case you have to deal with a list of purchases. For the sake of convenience you can process purchases this way:
+**Important!**
+On iOS 7+ all receipts may contain more than one purchase so you have to deal with a list of purchases. For the sake of convenience you can process purchases this way:
 
 .. code:: python
 
