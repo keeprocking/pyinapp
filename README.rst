@@ -1,3 +1,11 @@
+pyinapp
+=======
+
+.. image:: https://travis-ci.org/keeprocking/pyinapp.svg?branch=master
+    :target: https://travis-ci.org/keeprocking/pyinapp
+
+In-app purchase validation has never been so friendly and convenient!
+
 Installation
 ============
 ::
