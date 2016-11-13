@@ -20,7 +20,7 @@ class Purchase(object):
     @classmethod
     def from_google_play_receipt(cls, receipt):
         purchase = {
-            'transaction_id': receipt['orderId'],
+            'transaction_id': receipt.get('orderId', receipt['purchaseToken']),
             'product_id': receipt['productId'],
             'quantity': 1,
             'purchased_at': receipt['purchaseTime']
