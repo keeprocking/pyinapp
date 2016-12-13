@@ -1,8 +1,11 @@
 pyinapp
 =======
+|travis| |pypi|
 
-.. image:: https://travis-ci.org/keeprocking/pyinapp.svg?branch=master
+.. |travis| image:: https://travis-ci.org/keeprocking/pyinapp.svg?branch=master
     :target: https://travis-ci.org/keeprocking/pyinapp
+.. |pypi| image:: https://badge.fury.io/py/pyinapp.svg
+    :target: https://badge.fury.io/py/pyinapp
 
 In-app purchase validation has never been so friendly and convenient!
 
