@@ -1,5 +1,4 @@
 from pyinapp.purchase import Purchase
-import pytest
 
 
 def test_create_from_google_play_receipt():

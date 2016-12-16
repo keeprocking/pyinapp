@@ -32,8 +32,8 @@ Google Play:
     validator = GooglePlayValidator(bundle_id, api_key)
 
     try:
-        purchase = validator.validate('receipt', 'signature')
-        process_purchase(purchase)
+        purchases = validator.validate('receipt', 'signature')
+        process_purchases(purchases)
     except InAppValidationError:
         """ handle validation error """
 
@@ -48,18 +48,18 @@ App Store:
     validator = AppStoreValidator(bundle_id)
 
     try:
-        purchase = validator.validate('receipt')
-        process_purchase(purchase)
+        purchases = validator.validate('receipt')
+        process_purchases(purchases)
     except InAppValidationError:
         """ handle validation error """
 
 **Important!**
-On iOS 7+ all receipts may contain more than one purchase so you have to deal with a list of purchases. For the sake of convenience you can process purchases this way:
+If your version is under 0.1.3, you need to check the type of purchases. For the sake of convenience you can process purchases this way:
 
 .. code:: python
 
-    def process_purchase(purchase):
-        process(*purchase) if isinstance(purchase, list) else process(purchase)
+    def process_purchases(purchases):
+        process(*purchases) if isinstance(purchases, list) else process(purchases)
 
 
     def process(*purchases):
