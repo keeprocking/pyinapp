@@ -38,7 +38,7 @@ class GooglePlayValidator(object):
             if receipt_json['purchaseState'] != purchase_state_ok:
                 raise InAppValidationError('Item is not purchased')
 
-            return Purchase.from_google_play_receipt(receipt_json)
+            return [Purchase.from_google_play_receipt(receipt_json)]
         except (KeyError, ValueError):
             raise InAppValidationError('Bad receipt')
 

@@ -52,7 +52,7 @@ class AppStoreValidator(object):
     def _parse_ios6_receipt(self, receipt):
         if self.bundle_id != receipt['bid']:
             raise InAppValidationError('Bundle id mismatch')
-        return Purchase.from_app_store_receipt(receipt)
+        return [Purchase.from_app_store_receipt(receipt)]
 
     def _parse_ios7_receipt(self, receipt):
         if self.bundle_id != receipt['bundle_id']:
