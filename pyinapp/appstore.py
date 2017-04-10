@@ -6,14 +6,14 @@ import requests
 
 api_result_ok = 0
 api_result_errors = {
-    21000: InAppValidationError('Bad json'),
-    21002: InAppValidationError('Bad data'),
-    21003: InAppValidationError('Receipt authentication'),
-    21004: InAppValidationError('Shared secret mismatch'),
-    21005: InAppValidationError('Server is unavailable'),
-    21006: InAppValidationError('Subscription has expired'),
-    21007: InAppValidationError('Sandbox receipt was sent to the production env'),
-    21008: InAppValidationError('Production receipt was sent to the sandbox env'),
+    21000: 'Bad json',
+    21002: 'Bad data',
+    21003: 'Receipt authentication',
+    21004: 'Shared secret mismatch',
+    21005: 'Server is unavailable',
+    21006: 'Subscription has expired',
+    21007: 'Sandbox receipt was sent to the production env',
+    21008: 'Production receipt was sent to the sandbox env',
 }
 
 
@@ -36,25 +36,28 @@ class AppStoreValidator(object):
             raise InAppValidationError('HTTP error')
 
         status = api_response['status']
+
         if status != api_result_ok:
-            error = api_result_errors.get(status, InAppValidationError('Unknown API status'))
+            error = InAppValidationError(api_result_errors.get(status, 'Unknown API status'), api_response)
             raise error
 
         receipt = api_response['receipt']
-        purchases = self._parse_receipt(receipt)
+        purchases = self._parse_receipt(receipt, api_response)
         return purchases
 
-    def _parse_receipt(self, receipt):
+    def _parse_receipt(self, receipt, response):
         if 'in_app' in receipt:
-            return self._parse_ios7_receipt(receipt)
-        return self._parse_ios6_receipt(receipt)
+            return self._parse_ios7_receipt(receipt, response)
+        return self._parse_ios6_receipt(receipt, response)
 
-    def _parse_ios6_receipt(self, receipt):
+    def _parse_ios6_receipt(self, receipt, response):
         if self.bundle_id != receipt['bid']:
-            raise InAppValidationError('Bundle id mismatch')
-        return [Purchase.from_app_store_receipt(receipt)]
+            error = InAppValidationError('Bundle id mismatch', response)
+            raise error
+        return [Purchase.from_app_store_receipt(receipt, response)]
 
-    def _parse_ios7_receipt(self, receipt):
+    def _parse_ios7_receipt(self, receipt, response):
         if self.bundle_id != receipt['bundle_id']:
-            raise InAppValidationError('Bundle id mismatch')
-        return [Purchase.from_app_store_receipt(r) for r in receipt['in_app']]
+            error = InAppValidationError('Bundle id mismatch', response)
+            raise error
+        return [Purchase.from_app_store_receipt(r, response) for r in receipt['in_app']]
