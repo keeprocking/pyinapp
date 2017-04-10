@@ -78,3 +78,16 @@ Purchase is a universal wrapper for Google Play and App Store receipts. It conta
 - **product_id**: what product has been purchased (**product_id** for App Store and **productId** for Google Play);
 - **quantity**: how many products have been purchased (**quantity** for App Store and always **1** for Google Play - there's no such field in Google Play receipt);
 - **purchased_at**: when the product has been purchased, UNIX timestamp (**purchase_date** for App Store and **purchaseTime** for Google Play).
+
+Contributing
+============
+
+Install `pyinapp` for development
+::
+
+   python setup develop
+
+Run tests
+::
+
+   tox
