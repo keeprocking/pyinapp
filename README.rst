@@ -83,12 +83,10 @@ Purchase is a universal wrapper for Google Play and App Store receipts. It conta
 Contributing
 ============
 
-Install `pyinapp` for development
-::
+To run tests, you'll need tox_. After installing, simply run it:
 
-   python setup develop
+.. code:: python
 
-Run tests
-::
+    tox
 
-   tox
+.. _tox: https://pypi.python.org/pypi/tox
