@@ -27,8 +27,10 @@ class AppStoreValidator(object):
         else:
             self.url = 'https://buy.itunes.apple.com/verifyReceipt'
 
-    def validate(self, receipt):
+    def validate(self, receipt, password=None):
         receipt_json = {'receipt-data': receipt}
+        if password:
+            receipt_json['password'] = password
 
         try:
             api_response = requests.post(self.url, json=receipt_json).json()
